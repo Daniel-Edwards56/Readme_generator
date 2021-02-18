@@ -16,7 +16,7 @@ const promptUser = () =>
     {
       type: "input",
       name: "install",
-      message: "what other code needs to be installed?",
+      message: "What other code needs to be installed?",
     },
     {
       type: "input",
@@ -26,7 +26,7 @@ const promptUser = () =>
     {
       type: "input",
       name: "github",
-      message: "Enter your GitHub Username",
+      message: "Enter your or each of your teams GitHub Username(s)",
     },
     {
       type: "input",
@@ -35,17 +35,48 @@ const promptUser = () =>
     },
     {
       type: "list",
-      message: "What is your preferred method of communication?",
+      message: "What license would you like to add to your README?",
       name: "license",
-      choices: ["BSD", "MIT", "GPL", "No License"],
+      choices: ["MIT", "No License"],
     },
   ]);
 
-const generateREADME = (answers) => ``;
+const generateREADME = (answers) =>
+  `
+# ${answers.name}
+
+${answers.license}
+
+## Table of Contents
+
+* Description, Instalation, Usage
+* Questions
+* License
+
+## Description
+${answers.description}
+
+${answers.install} will also need to be installed for this code to work.
+
+${answers.invoke} is how to invoke this code.
+
+## Questions
+Check us out on GitHub at ${answers.github} for any questions or you can email us at ${answers.email}.
+
+`;
 
 const init = () => {
   promptUser().then((answers) => {
+    const answerCheck = () => {
+      if (answers.license === "No License") {
+        answers.license = "";
+      } else {
+        answers.license = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+      }
+    };
+
     try {
+      answerCheck();
       const md = generateREADME(answers);
       fs.writeFileSync("NEWREADME.md", md);
       console.log("Successfully wrote to NEWREADME.md");
