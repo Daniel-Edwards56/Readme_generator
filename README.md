@@ -19,3 +19,5 @@ Type node index.js into the terminal is how to invoke this code.
 ## Questions
 
 Check us out on GitHub at Daniel-Edward56 for any questions or you can email us at danieledwards56m@gmail.com.
+
+You can see a video tutorial at https://github.com/Daniel-Edwards56/Readme_generator/blob/main/video-readme.gif
